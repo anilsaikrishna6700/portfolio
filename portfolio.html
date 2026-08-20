@@ -1,0 +1,835 @@
+<!-- ============================================================
+     ANIL SAI KRISHNA — PORTFOLIO (WordPress Custom HTML block/widget)
+     Paste this ENTIRE block into ONE Custom HTML widget or block.
+     Self-contained (CSS + JS included) and scoped under #ask-portfolio
+     so it won't clash with your theme's styles.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<div id="ask-portfolio">
+
+<style>
+  #ask-portfolio{
+    --navy-deep:#020D2B; --navy:#0A2340; --navy-mid:#0E3253;
+    --teal:#137495; --teal-light:#1E93BD;
+    --sand:#F5F1E6; --sand-warm:#EFE4C9;
+    --brass:#C9A24A; --brass-light:#E3C687;
+    --coral:#D9603B;
+    --ink:#15212B; --ink-soft:#4C5A63;
+    --cream-card:#FBF9F2;
+    --line:rgba(2,13,43,0.12); --line-dark:rgba(245,241,230,0.14);
+
+    font-family:'Work Sans', sans-serif; background:var(--sand); color:var(--ink);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; width:100%;
+  }
+  #ask-portfolio, #ask-portfolio *, #ask-portfolio *::before, #ask-portfolio *::after{ box-sizing:border-box; }
+  #ask-portfolio img{ max-width:100%; display:block; }
+  #ask-portfolio a{ text-decoration:none; color:inherit; }
+  #ask-portfolio ul{ list-style:none; margin:0; padding:0; }
+  #ask-portfolio button{ font-family:inherit; }
+  #ask-portfolio .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  #ask-portfolio .eyebrow{ font-family:'Space Mono', monospace; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; }
+  #ask-portfolio h1, #ask-portfolio h2, #ask-portfolio h3, #ask-portfolio h4{ font-family:'Fraunces', serif; font-weight:600; line-height:1.08; letter-spacing:-.01em; margin:0; }
+  #ask-portfolio .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 28px; border-radius:3px; font-weight:600; font-size:14.5px; letter-spacing:.02em; cursor:pointer; border:1.5px solid transparent; transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease; white-space:nowrap; }
+  #ask-portfolio .btn-gold{ background:linear-gradient(180deg, var(--brass-light), var(--brass)); color:var(--navy-deep); box-shadow:0 8px 20px -8px rgba(201,162,74,.7); }
+  #ask-portfolio .btn-gold:hover{ transform:translateY(-2px); box-shadow:0 12px 26px -8px rgba(201,162,74,.85); }
+  #ask-portfolio .btn-outline{ border-color:rgba(2,13,43,.28); color:var(--navy); }
+  #ask-portfolio .btn-outline-inv{ border-color:rgba(245,241,230,.55); color:var(--sand); }
+  #ask-portfolio .btn-outline:hover{ background:rgba(2,13,43,.05); border-color:var(--navy); }
+  #ask-portfolio .btn-outline-inv:hover{ background:rgba(245,241,230,.1); border-color:var(--sand); }
+
+  /* ---------- NAV ---------- */
+  #ask-portfolio header{ position:sticky; top:0; z-index:100; background:rgba(2,13,43,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line-dark); }
+  #ask-portfolio nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:80px; }
+  #ask-portfolio .logo{ display:flex; align-items:center; gap:12px; }
+  #ask-portfolio .logo-mark{ width:44px; height:44px; border-radius:50%; border:1.5px solid var(--brass); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; font-size:16px; color:var(--brass-light); background:rgba(201,162,74,.08); }
+  #ask-portfolio .logo-word{ font-family:'Fraunces', serif; font-weight:600; font-size:16.5px; color:var(--sand); letter-spacing:.02em; line-height:1.15; }
+  #ask-portfolio .logo-word span{ display:block; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.24em; color:var(--brass-light); font-weight:700; margin-top:3px; }
+  #ask-portfolio .nav-links{ display:flex; align-items:center; gap:34px; }
+  #ask-portfolio .nav-links a{ font-size:14px; font-weight:500; color:rgba(245,241,230,.85); position:relative; padding:4px 0; transition:color .2s ease; }
+  #ask-portfolio .nav-links a::after{ content:''; position:absolute; left:0; bottom:-2px; width:0; height:1.5px; background:var(--brass-light); transition:width .25s ease; }
+  #ask-portfolio .nav-links a:hover{ color:var(--sand); }
+  #ask-portfolio .nav-links a:hover::after{ width:100%; }
+  #ask-portfolio .nav-links a.active::after{ width:100%; }
+  #ask-portfolio .nav-cta{ display:flex; align-items:center; gap:16px; }
+  #ask-portfolio .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px; }
+  #ask-portfolio .burger span{ width:22px; height:2px; background:var(--sand); display:block; }
+
+  /* ---------- HERO ---------- */
+  #ask-portfolio .hero{ position:relative; background:radial-gradient(ellipse at 80% 15%, rgba(19,116,149,.35), transparent 55%), linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 60%, var(--navy-mid) 100%); color:var(--sand); padding:70px 0 90px; overflow:hidden; }
+  #ask-portfolio .hero::before{ content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(245,241,230,.06) 1px, transparent 1px); background-size:22px 22px; opacity:.5; pointer-events:none; }
+  #ask-portfolio .hero-grid{ display:grid; grid-template-columns:1.05fr .85fr; gap:50px; align-items:center; position:relative; z-index:2; }
+  #ask-portfolio .hero-eyebrow{ color:var(--brass-light); border:1px solid rgba(201,162,74,.4); padding:8px 18px; border-radius:100px; background:rgba(201,162,74,.08); margin-bottom:24px; }
+  #ask-portfolio .hero h1{ font-size:clamp(34px, 4.8vw, 58px); margin-bottom:18px; }
+  #ask-portfolio .hero h1 em{ font-style:italic; font-weight:500; color:var(--brass-light); }
+  #ask-portfolio .hero p.lede{ font-size:17px; line-height:1.7; color:rgba(245,241,230,.78); max-width:460px; margin-bottom:30px; }
+  #ask-portfolio .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px; }
+  #ask-portfolio .hero-meta{ display:flex; gap:32px; flex-wrap:wrap; }
+  #ask-portfolio .hero-meta div{ border-left:1px solid rgba(245,241,230,.2); padding-left:16px; }
+  #ask-portfolio .hero-meta strong{ display:block; font-family:'Fraunces',serif; font-size:24px; color:var(--sand); font-weight:600; }
+  #ask-portfolio .hero-meta span{ font-size:12px; color:rgba(245,241,230,.6); letter-spacing:.03em; }
+  #ask-portfolio .hero-badge{ position:relative; display:flex; align-items:center; justify-content:center; }
+  #ask-portfolio .hero-badge-ring{ position:absolute; width:100%; height:100%; border-radius:50%; background:radial-gradient(circle, rgba(201,162,74,.16), transparent 70%); }
+  #ask-portfolio .hero-photo{ width:min(300px, 78%); aspect-ratio:1/1; border-radius:50%; box-shadow:0 30px 70px -20px rgba(0,0,0,.6), 0 0 0 10px rgba(245,241,230,.05); position:relative; z-index:2; background:linear-gradient(155deg, var(--navy-mid), var(--teal)); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(245,241,230,.55); }
+  #ask-portfolio .hero-photo span{ font-family:'Space Mono',monospace; font-size:10.5px; letter-spacing:.1em; }
+  #ask-portfolio .hero-ring-spin{ position:absolute; width:min(340px,88%); aspect-ratio:1/1; border-radius:50%; border:1px dashed rgba(227,198,135,.35); animation:spinSlow 60s linear infinite; z-index:1; }
+  @keyframes spinSlow{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+  #ask-portfolio .wave-divider{ display:block; width:100%; line-height:0; position:relative; z-index:3; margin-top:-6px; }
+  #ask-portfolio .wave-divider svg{ width:100%; height:auto; display:block; }
+
+  /* ---------- ABOUT ---------- */
+  #ask-portfolio .about{ background:var(--sand); padding:76px 0 70px; }
+  #ask-portfolio .about-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center; }
+  #ask-portfolio .about-art{ position:relative; border-radius:6px; overflow:hidden; background:linear-gradient(155deg, var(--navy) 0%, var(--teal) 130%); aspect-ratio:4/4.4; display:flex; align-items:center; justify-content:center; }
+  #ask-portfolio .about-art-inner{ display:flex; flex-direction:column; align-items:center; gap:12px; color:rgba(245,241,230,.6); }
+  #ask-portfolio .about-art-inner span{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; }
+  #ask-portfolio .about-badge{ position:absolute; bottom:20px; left:20px; right:20px; background:rgba(2,13,43,.55); backdrop-filter:blur(6px); border:1px solid var(--line-dark); border-radius:4px; padding:15px 17px; color:var(--sand); }
+  #ask-portfolio .about-badge strong{ font-family:'Fraunces',serif; font-size:19px; display:block; color:var(--brass-light); }
+  #ask-portfolio .about-badge span{ font-size:11.5px; letter-spacing:.03em; color:rgba(245,241,230,.75); }
+  #ask-portfolio .about-content .eyebrow{ color:var(--coral); }
+  #ask-portfolio .about-content h2{ font-size:clamp(28px,3.2vw,40px); color:var(--navy); margin:14px 0 16px; }
+  #ask-portfolio .about-content h2 em{ color:var(--teal-light); font-style:italic; font-weight:500; }
+  #ask-portfolio .about-content > p{ font-size:16px; line-height:1.75; color:var(--ink-soft); max-width:520px; margin-bottom:28px; }
+  #ask-portfolio .feature-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line); }
+  #ask-portfolio .feature-item{ padding:20px 18px 0 20px; border-left:1px solid var(--line); }
+  #ask-portfolio .feature-item:first-child{ border-left:none; padding-left:0; }
+  #ask-portfolio .feature-item svg{ margin-bottom:12px; }
+  #ask-portfolio .feature-item h4{ font-size:14.5px; color:var(--navy); margin-bottom:6px; font-weight:600; font-family:'Work Sans',sans-serif; }
+  #ask-portfolio .feature-item p{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin:0; }
+
+  /* ---------- STRENGTHS (dark band) ---------- */
+  #ask-portfolio .why{ background:linear-gradient(180deg, var(--navy-deep), var(--navy) 45%, var(--teal) 155%); padding:76px 0; color:var(--sand); position:relative; }
+  #ask-portfolio .why-head{ max-width:560px; margin-bottom:46px; }
+  #ask-portfolio .why-head .eyebrow{ color:var(--brass-light); margin-bottom:12px; }
+  #ask-portfolio .why-head h2{ font-size:clamp(28px,3.2vw,38px); }
+  #ask-portfolio .why-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-dark); border:1px solid var(--line-dark); border-radius:6px; overflow:hidden; }
+  #ask-portfolio .why-card{ background:rgba(2,13,43,.55); padding:32px 24px; transition:background .3s ease, transform .3s ease; }
+  #ask-portfolio .why-card:hover{ background:rgba(19,116,149,.3); transform:translateY(-4px); }
+  #ask-portfolio .why-card svg{ margin-bottom:16px; }
+  #ask-portfolio .why-card h3{ font-size:18px; margin-bottom:8px; font-weight:600; }
+  #ask-portfolio .why-card p{ font-size:13.5px; line-height:1.6; color:rgba(245,241,230,.7); margin:0; }
+
+  /* ---------- FEATURED PROJECTS (picks) ---------- */
+  #ask-portfolio .picks{ background:var(--sand); padding:76px 0 0; }
+  #ask-portfolio .picks-head{ text-align:center; max-width:600px; margin:0 auto 40px; }
+  #ask-portfolio .picks-head .eyebrow{ color:var(--coral); justify-content:center; margin-bottom:12px; }
+  #ask-portfolio .picks-head h2{ font-size:clamp(28px,3.6vw,40px); color:var(--navy); margin-bottom:12px; }
+  #ask-portfolio .picks-head p{ color:var(--ink-soft); font-size:15.5px; margin:0; }
+  #ask-portfolio .picks-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+  #ask-portfolio .pick-card{ background:var(--cream-card); border:1px solid var(--line); border-radius:4px; padding:26px 16px 20px; text-align:center; transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+  #ask-portfolio .pick-card:hover{ transform:translateY(-6px); box-shadow:0 24px 40px -20px rgba(2,13,43,.35); border-color:var(--brass); }
+  #ask-portfolio .pick-badge{ font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--coral); margin-bottom:12px; display:block; }
+  #ask-portfolio .pick-card svg{ margin:0 auto 14px; }
+  #ask-portfolio .pick-card h3{ font-family:'Fraunces',serif; font-size:15.5px; color:var(--navy); margin-bottom:6px; font-weight:600; line-height:1.25; min-height:38px; display:flex; align-items:center; justify-content:center; }
+  #ask-portfolio .pick-card .price{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--teal); font-weight:700; }
+
+  /* ---------- SKILLS ---------- */
+  #ask-portfolio .skills{ background:var(--sand); padding:76px 0; }
+  #ask-portfolio .skills-head{ text-align:center; max-width:640px; margin:0 auto 34px; }
+  #ask-portfolio .skills-head .eyebrow{ color:var(--coral); justify-content:center; margin-bottom:12px; }
+  #ask-portfolio .skills-head h2{ font-size:clamp(28px,3.6vw,40px); color:var(--navy); margin-bottom:12px; }
+  #ask-portfolio .skills-head p{ color:var(--ink-soft); font-size:15.5px; margin:0; }
+  #ask-portfolio .skill-filters{ display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-bottom:28px; }
+  #ask-portfolio .filter-pill{ background:var(--cream-card); border:1px solid var(--line); color:var(--ink-soft); padding:9px 18px; border-radius:100px; font-size:13px; font-weight:500; cursor:pointer; transition:all .2s ease; }
+  #ask-portfolio .filter-pill:hover{ border-color:var(--teal); color:var(--navy); }
+  #ask-portfolio .filter-pill.active{ background:var(--navy); border-color:var(--navy); color:var(--sand); font-weight:600; }
+  #ask-portfolio .skills-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; }
+  #ask-portfolio .skill-card{ background:var(--cream-card); border:1px solid var(--line); border-radius:4px; padding:18px 20px; transition:transform .25s ease, border-color .25s ease; }
+  #ask-portfolio .skill-card:hover{ transform:translateY(-3px); border-color:var(--brass); }
+  #ask-portfolio .skill-card.hide{ display:none; }
+  #ask-portfolio .skill-cat{ font-family:'Space Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--teal); margin:0 0 8px; }
+  #ask-portfolio .skill-name{ font-family:'Fraunces',serif; font-weight:600; font-size:15.5px; color:var(--navy); margin:0; }
+
+  /* ---------- PROJECT DIRECTORY (menu-style, interactive) ---------- */
+  #ask-portfolio .directory{ background:var(--sand); padding:76px 0 90px; }
+  #ask-portfolio .directory-head{ text-align:center; max-width:640px; margin:0 auto 34px; }
+  #ask-portfolio .directory-head .eyebrow{ color:var(--coral); justify-content:center; margin-bottom:12px; }
+  #ask-portfolio .directory-head h2{ font-size:clamp(28px,3.6vw,40px); color:var(--navy); margin-bottom:12px; }
+  #ask-portfolio .directory-head p{ color:var(--ink-soft); font-size:15.5px; margin:0; }
+  #ask-portfolio .directory-panel{ background:var(--navy-deep); border-radius:10px; padding:30px; color:var(--sand); }
+  #ask-portfolio .dir-search{ position:relative; margin-bottom:20px; }
+  #ask-portfolio .dir-search svg{ position:absolute; left:16px; top:50%; transform:translateY(-50%); opacity:.5; }
+  #ask-portfolio .dir-search input{ width:100%; background:rgba(245,241,230,.06); border:1px solid var(--line-dark); border-radius:5px; padding:14px 16px 14px 46px; color:var(--sand); font-size:15px; font-family:inherit; }
+  #ask-portfolio .dir-search input::placeholder{ color:rgba(245,241,230,.4); }
+  #ask-portfolio .dir-search input:focus{ outline:none; border-color:var(--brass-light); }
+  #ask-portfolio .dir-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:14px; margin-bottom:12px; border-bottom:1px solid var(--line-dark); }
+  #ask-portfolio .dir-tabs::-webkit-scrollbar{ height:5px; }
+  #ask-portfolio .dir-tabs::-webkit-scrollbar-thumb{ background:rgba(245,241,230,.2); border-radius:10px; }
+  #ask-portfolio .tab-pill{ flex-shrink:0; background:rgba(245,241,230,.05); border:1px solid var(--line-dark); color:rgba(245,241,230,.72); padding:9px 16px; border-radius:100px; font-size:13px; font-weight:500; cursor:pointer; transition:all .2s ease; white-space:nowrap; }
+  #ask-portfolio .tab-pill:hover{ background:rgba(245,241,230,.1); color:var(--sand); }
+  #ask-portfolio .tab-pill.active{ background:var(--brass); border-color:var(--brass); color:var(--navy-deep); font-weight:700; }
+  #ask-portfolio .dir-results{ min-height:160px; }
+  #ask-portfolio .dir-subhead{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--brass-light); margin:22px 0 8px; }
+  #ask-portfolio .dir-subhead:first-child{ margin-top:2px; }
+  #ask-portfolio .dir-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; padding:16px 0; border-bottom:1px dashed var(--line-dark); }
+  #ask-portfolio .dir-row-cat{ font-size:10px; color:var(--teal-light); display:block; font-family:'Space Mono',monospace; letter-spacing:.06em; margin-bottom:4px; text-transform:uppercase; }
+  #ask-portfolio .dir-row-name{ font-family:'Fraunces',serif; font-size:16.5px; color:var(--sand); font-weight:600; }
+  #ask-portfolio .dir-row-desc{ font-size:12.5px; color:rgba(245,241,230,.55); display:block; margin-top:5px; line-height:1.5; max-width:480px; }
+  #ask-portfolio .dir-row-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
+  #ask-portfolio .dir-row-tags span{ font-size:10.5px; padding:3px 9px; border-radius:100px; border:1px solid var(--line-dark); color:rgba(245,241,230,.55); }
+  #ask-portfolio .dir-row-action{ font-family:'Space Mono',monospace; font-size:12.5px; color:var(--brass-light); white-space:nowrap; flex-shrink:0; font-weight:700; padding-top:2px; }
+  #ask-portfolio .dir-row-action.disabled{ color:rgba(245,241,230,.35); }
+  #ask-portfolio .dir-empty{ text-align:center; padding:50px 0; color:rgba(245,241,230,.5); font-size:14px; }
+  #ask-portfolio .dir-footnote{ text-align:center; margin-top:22px; font-size:12px; color:rgba(245,241,230,.4); letter-spacing:.03em; }
+
+  /* ---------- EXPERIENCE (replaces testimonials band) ---------- */
+  #ask-portfolio .experience{ background:var(--sand-warm); padding:76px 0; }
+  #ask-portfolio .exp-head{ text-align:center; margin-bottom:44px; }
+  #ask-portfolio .exp-head .eyebrow{ color:var(--teal); justify-content:center; margin-bottom:12px; }
+  #ask-portfolio .exp-head h2{ font-size:clamp(26px,3.2vw,36px); color:var(--navy); margin-bottom:8px; }
+  #ask-portfolio .exp-head p{ color:var(--ink-soft); font-size:14.5px; margin:0; }
+  #ask-portfolio .exp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  #ask-portfolio .exp-card{ background:var(--cream-card); border-radius:4px; padding:28px 26px; border-top:3px solid var(--brass); box-shadow:0 20px 40px -30px rgba(2,13,43,.4); }
+  #ask-portfolio .exp-card-icon{ margin-bottom:14px; }
+  #ask-portfolio .exp-card h3{ font-family:'Fraunces',serif; font-size:18px; color:var(--navy); margin-bottom:12px; font-weight:600; }
+  #ask-portfolio .exp-card ul li{ font-size:13.5px; line-height:1.6; color:var(--ink-soft); padding-left:15px; position:relative; margin-bottom:7px; }
+  #ask-portfolio .exp-card ul li::before{ content:'—'; position:absolute; left:0; color:var(--brass); }
+
+  /* ---------- CONTACT ---------- */
+  #ask-portfolio .contact{ background:var(--navy-deep); color:var(--sand); padding:80px 0; }
+  #ask-portfolio .contact-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:start; }
+  #ask-portfolio .contact-info .eyebrow{ color:var(--brass-light); margin-bottom:14px; }
+  #ask-portfolio .contact-info h2{ font-size:clamp(26px,3vw,36px); margin-bottom:16px; }
+  #ask-portfolio .contact-info > p{ color:rgba(245,241,230,.7); line-height:1.7; margin-bottom:28px; max-width:420px; }
+  #ask-portfolio .info-line{ display:flex; gap:14px; align-items:flex-start; margin-bottom:18px; }
+  #ask-portfolio .info-line svg{ flex-shrink:0; margin-top:2px; }
+  #ask-portfolio .info-line strong{ display:block; font-size:14.5px; color:var(--sand); margin-bottom:2px; }
+  #ask-portfolio .info-line span{ font-size:13px; color:rgba(245,241,230,.6); }
+  #ask-portfolio .form-card{ background:rgba(245,241,230,.04); border:1px solid var(--line-dark); border-radius:6px; padding:34px; }
+  #ask-portfolio .form-card h3{ font-family:'Fraunces',serif; font-size:20px; margin-bottom:6px; }
+  #ask-portfolio .form-card > p{ font-size:13px; color:rgba(245,241,230,.6); margin-bottom:24px; }
+  #ask-portfolio .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  #ask-portfolio .field{ margin-bottom:16px; }
+  #ask-portfolio .field label{ display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-family:'Space Mono',monospace; color:rgba(245,241,230,.55); margin-bottom:8px; }
+  #ask-portfolio .field input, #ask-portfolio .field textarea{ width:100%; background:rgba(2,13,43,.6); border:1px solid var(--line-dark); border-radius:3px; padding:13px 14px; color:var(--sand); font-family:'Work Sans',sans-serif; font-size:14.5px; transition:border-color .2s ease; }
+  #ask-portfolio .field input::placeholder, #ask-portfolio .field textarea::placeholder{ color:rgba(245,241,230,.32); }
+  #ask-portfolio .field input:focus, #ask-portfolio .field textarea:focus{ outline:none; border-color:var(--brass-light); }
+  #ask-portfolio .field textarea{ resize:vertical; min-height:96px; }
+  #ask-portfolio .field-err{ font-size:11.5px; color:var(--coral); min-height:14px; display:block; margin-top:5px; }
+  #ask-portfolio .form-card .btn{ width:100%; margin-top:4px; }
+  #ask-portfolio .form-success{ color:var(--brass-light); font-size:13px; margin-top:14px; opacity:0; transform:translateY(6px); transition:opacity .3s, transform .3s; }
+  #ask-portfolio .form-success.show{ opacity:1; transform:translateY(0); }
+
+  /* ---------- FOOTER ---------- */
+  #ask-portfolio footer{ background:var(--navy-deep); border-top:1px solid var(--line-dark); padding:60px 0 26px; color:rgba(245,241,230,.65); }
+  #ask-portfolio .footer-grid{ display:grid; grid-template-columns:1.4fr .8fr .8fr 1fr; gap:36px; padding-bottom:40px; border-bottom:1px solid var(--line-dark); }
+  #ask-portfolio .footer-brand .logo{ margin-bottom:14px; }
+  #ask-portfolio .footer-brand p{ font-size:13px; line-height:1.7; max-width:280px; margin-bottom:18px; color:rgba(245,241,230,.55); }
+  #ask-portfolio .socials{ display:flex; gap:10px; }
+  #ask-portfolio .socials a{ width:34px; height:34px; border-radius:50%; border:1px solid var(--line-dark); display:flex; align-items:center; justify-content:center; transition:background .2s ease, border-color .2s ease; }
+  #ask-portfolio .socials a:hover{ background:var(--brass); border-color:var(--brass); color:var(--navy-deep); }
+  #ask-portfolio .footer-col h4{ font-family:'Space Mono',monospace; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--sand); margin-bottom:18px; }
+  #ask-portfolio .footer-col ul li{ margin-bottom:11px; }
+  #ask-portfolio .footer-col ul li a{ font-size:13.5px; transition:color .2s ease; }
+  #ask-portfolio .footer-col ul li a:hover{ color:var(--brass-light); }
+  #ask-portfolio .footer-bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:22px; font-size:12px; flex-wrap:wrap; gap:10px; }
+  #ask-portfolio .footer-bottom a{ margin-left:16px; color:rgba(245,241,230,.5); }
+  #ask-portfolio .footer-bottom a:hover{ color:var(--sand); }
+
+  #ask-portfolio .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  #ask-portfolio .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (max-width:980px){
+    #ask-portfolio .nav-links{ display:none; }
+    #ask-portfolio .burger{ display:flex; }
+    #ask-portfolio .hero-grid, #ask-portfolio .about-grid, #ask-portfolio .contact-grid{ grid-template-columns:1fr; }
+    #ask-portfolio .hero-badge{ margin-top:26px; }
+    #ask-portfolio .why-grid, #ask-portfolio .exp-grid{ grid-template-columns:repeat(2,1fr); }
+    #ask-portfolio .picks-grid{ grid-template-columns:repeat(3,1fr); }
+    #ask-portfolio .footer-grid{ grid-template-columns:1fr 1fr; }
+    #ask-portfolio .feature-row{ grid-template-columns:repeat(2,1fr); row-gap:20px; }
+    #ask-portfolio .feature-item{ border-left:none; padding-left:0; }
+    #ask-portfolio .form-row{ grid-template-columns:1fr; }
+    #ask-portfolio .dir-row{ flex-direction:column; }
+  }
+  @media (max-width:620px){
+    #ask-portfolio .why-grid, #ask-portfolio .exp-grid, #ask-portfolio .footer-grid{ grid-template-columns:1fr; }
+    #ask-portfolio .picks-grid{ grid-template-columns:repeat(2,1fr); }
+    #ask-portfolio .hero{ padding:50px 0 70px; }
+    #ask-portfolio .hero-meta{ gap:18px; }
+    #ask-portfolio .about, #ask-portfolio .why, #ask-portfolio .picks, #ask-portfolio .skills, #ask-portfolio .directory, #ask-portfolio .experience, #ask-portfolio .contact{ padding-top:52px; padding-bottom:52px; }
+    #ask-portfolio .directory-panel{ padding:20px; }
+  }
+  @media (prefers-reduced-motion: reduce){ #ask-portfolio *{ transition:none !important; animation:none !important; } }
+</style>
+
+<header>
+  <nav class="wrap">
+    <a href="#ask-home" class="logo">
+      <span class="logo-mark">AS</span>
+      <span class="logo-word">Anil Sai Krishna<span>WORDPRESS &amp; FRONTEND DEV</span></span>
+    </a>
+    <div class="nav-links" id="askNavLinks">
+      <a href="#ask-home" data-sec="ask-home">Home</a>
+      <a href="#ask-about" data-sec="ask-about">About</a>
+      <a href="#ask-skills" data-sec="ask-skills">Skills</a>
+      <a href="#ask-projects" data-sec="ask-projects">Projects</a>
+      <a href="#ask-contact" data-sec="ask-contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="/assets/Anil-Sai-Krishna-Resume.pdf" class="btn btn-gold" download>Resume</a>
+      <button class="burger" id="askBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="ask-home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow hero-eyebrow reveal in">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 10h16M10 10v10" stroke="currentColor" stroke-width="1.6"/></svg>
+        WordPress &nbsp;·&nbsp; Elementor &nbsp;·&nbsp; Frontend Development
+      </div>
+      <h1 class="reveal in">Building modern, responsive<br><em>digital experiences.</em></h1>
+      <p class="lede reveal in">WordPress Developer &amp; Frontend Developer with hands-on internship experience — turning design requirements into responsive, functional websites using WordPress, Elementor and modern frontend technologies.</p>
+      <div class="hero-actions reveal in">
+        <a href="#ask-projects" class="btn btn-gold">View My Work</a>
+        <a href="#ask-contact" class="btn btn-outline-inv">Get in Touch →</a>
+      </div>
+      <div class="hero-meta reveal in">
+        <div><strong>9</strong><span>Internship Projects</span></div>
+        <div><strong>1</strong><span>WordPress Web Dev Internship</span></div>
+        <div><strong>2026</strong><span>B.Tech Graduate, GNITC</span></div>
+      </div>
+    </div>
+
+    <div class="hero-badge reveal in">
+      <div class="hero-badge-ring"></div>
+      <div class="hero-ring-spin"></div>
+      <div class="hero-photo">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span>PROFILE PHOTO</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,32 C240,80 480,0 720,28 C960,56 1200,84 1440,40 L1440,90 L0,90 Z" fill="#F5F1E6"/></svg>
+  </div>
+</section>
+
+<section class="about" id="ask-about">
+  <div class="wrap about-grid">
+    <div class="about-art reveal">
+      <div class="about-art-inner">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>
+        <span>WORDPRESS &amp; ELEMENTOR WORK</span>
+      </div>
+      <div class="about-badge">
+        <strong>WordPress Web Development Intern</strong>
+        <span>Real client websites — Elementor, responsive builds, troubleshooting</span>
+      </div>
+    </div>
+
+    <div class="about-content reveal">
+      <span class="eyebrow">About Me</span>
+      <h2>Hello, I'm<br><em>Anil Sai Krishna</em></h2>
+      <p>A WordPress and Frontend Developer passionate about creating responsive, visually engaging and user-friendly websites. I gained practical experience through a WordPress Web Development Internship, working on real-world websites and client-oriented tasks. I enjoy transforming design requirements into responsive, functional websites, and I'm continuously sharpening my WordPress skill set alongside frontend fundamentals like JavaScript and React.js.</p>
+
+      <div class="feature-row">
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="#137495" stroke-width="1.6"/><path d="M3 9h18" stroke="#137495" stroke-width="1.6"/></svg>
+          <h4>WordPress Development</h4>
+          <p>Building &amp; customizing sites</p>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#137495" stroke-width="1.6"/><path d="M4 14h16M9 4v16" stroke="#137495" stroke-width="1.6"/></svg>
+          <h4>Elementor &amp; Elementor Pro</h4>
+          <p>Sections, layouts, landing pages</p>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="12" height="16" rx="1" stroke="#137495" stroke-width="1.6"/><rect x="17" y="9" width="4" height="9" rx="1" stroke="#137495" stroke-width="1.6"/></svg>
+          <h4>Responsive Design</h4>
+          <p>Desktop, tablet &amp; mobile testing</p>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="#137495" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#137495" stroke-width="1.6"/></svg>
+          <h4>Maintenance &amp; Fixes</h4>
+          <p>Troubleshooting &amp; performance</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="why-head reveal">
+      <span class="eyebrow">Core Strengths</span>
+      <h2>What I bring to a project</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="#E3C687" stroke-width="1.5"/><path d="M3 9h18M9 4v5" stroke="#E3C687" stroke-width="1.5"/></svg>
+        <h3>Hands-on WordPress</h3>
+        <p>Real internship experience building and customizing live client websites in WordPress and Elementor.</p>
+      </div>
+      <div class="why-card reveal">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="12" height="16" rx="1" stroke="#E3C687" stroke-width="1.5"/><rect x="17" y="9" width="4" height="9" rx="1" stroke="#E3C687" stroke-width="1.5"/></svg>
+        <h3>Pixel-Perfect Responsive</h3>
+        <p>Layouts tested and refined across desktop, tablet and mobile — typography, spacing and alignment included.</p>
+      </div>
+      <div class="why-card reveal">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="#E3C687" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#E3C687" stroke-width="1.5"/></svg>
+        <h3>Troubleshooting</h3>
+        <p>Comfortable diagnosing and fixing Elementor, form, SMTP and layout issues on live sites.</p>
+      </div>
+      <div class="why-card reveal">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#E3C687" stroke-width="1.5"/><path d="M21 21l-4.3-4.3" stroke="#E3C687" stroke-width="1.5"/></svg>
+        <h3>Performance &amp; SEO</h3>
+        <p>Image optimization, metadata updates and page-level SEO tasks as part of routine maintenance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="picks">
+  <div class="wrap">
+    <div class="picks-head reveal">
+      <span class="eyebrow">Featured Work</span>
+      <h2>Projects at a glance</h2>
+      <p>A quick look at internship projects — full details further down.</p>
+    </div>
+    <div class="picks-grid">
+      <div class="pick-card reveal">
+        <span class="pick-badge">Live Site</span>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="#D9603B" stroke-width="1.4"/><path d="M3 9h18" stroke="#D9603B" stroke-width="1.4"/></svg>
+        <h3>Render Atelier</h3>
+        <span class="price">Architecture · Elementor</span>
+      </div>
+      <div class="pick-card reveal">
+        <span class="pick-badge">Case Study</span>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3.5C14 6 15.5 5 17.5 5 21 5 23.5 8.5 21.5 12.5 19 16.65 12 21 12 21z" stroke="#137495" stroke-width="1.4"/></svg>
+        <h3>Vaaraahi Banquet Hall</h3>
+        <span class="price">Hospitality · Hyderabad</span>
+      </div>
+      <div class="pick-card reveal">
+        <span class="pick-badge">Live Site</span>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h8l-1 8 10-12h-8z" stroke="#C9A24A" stroke-width="1.4"/></svg>
+        <h3>Autronx</h3>
+        <span class="price">Technology · Product</span>
+      </div>
+      <div class="pick-card reveal">
+        <span class="pick-badge">Case Study</span>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#137495" stroke-width="1.4"/><path d="M8 12h8M12 8v8" stroke="#137495" stroke-width="1.4"/></svg>
+        <h3>Greenvissage</h3>
+        <span class="price">Business · Tax Services</span>
+      </div>
+      <div class="pick-card reveal">
+        <span class="pick-badge">In Progress</span>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="#E8A34C" stroke-width="1.4"/><path d="M8 8h8v8H8z" stroke="#E8A34C" stroke-width="1.4"/></svg>
+        <h3>Grandline Buffet</h3>
+        <span class="price">Hospitality · Restaurant</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="ask-skills">
+  <div class="wrap">
+    <div class="skills-head reveal">
+      <span class="eyebrow">Technical Skills</span>
+      <h2>What I work with</h2>
+      <p>Focused on WordPress, with solid frontend fundamentals to match.</p>
+    </div>
+    <div class="skill-filters reveal" id="askSkillFilters"></div>
+    <div class="skills-grid" id="askSkillsGrid"></div>
+  </div>
+</section>
+
+<section class="directory" id="ask-projects">
+  <div class="wrap">
+    <div class="directory-head reveal">
+      <span class="eyebrow">Selected Internship Projects</span>
+      <h2>Explore the full project list</h2>
+      <p>Search by name, or filter by category — real websites from my WordPress internship.</p>
+    </div>
+
+    <div class="directory-panel reveal">
+      <div class="dir-search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#F5F1E6" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="#F5F1E6" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input type="text" id="askDirSearch" placeholder="Search projects — e.g. hospitality, Elementor, WordPress...">
+      </div>
+      <div class="dir-tabs" id="askDirTabs"></div>
+      <div class="dir-results" id="askDirResults"></div>
+      <div class="dir-footnote">Live links shown where a verified URL is available · Others shown as case studies pending final details</div>
+    </div>
+  </div>
+</section>
+
+<section class="experience">
+  <div class="wrap">
+    <div class="exp-head reveal">
+      <span class="eyebrow">Internship Experience</span>
+      <h2>WordPress Web Development Intern</h2>
+      <p>Hands-on experience across the full lifecycle of a WordPress build</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal">
+        <div class="exp-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="#C9A24A" stroke-width="1.5"/><path d="M3 9h18M9 4v5" stroke="#C9A24A" stroke-width="1.5"/></svg></div>
+        <h3>Build &amp; Design</h3>
+        <ul>
+          <li>Developing and customizing WordPress websites</li>
+          <li>Building responsive pages with Elementor &amp; Elementor Pro</li>
+          <li>Creating service pages, landing pages, headers &amp; footers</li>
+          <li>Implementing forms, popups &amp; thank-you redirects</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="12" height="16" rx="1" stroke="#C9A24A" stroke-width="1.5"/><rect x="17" y="9" width="4" height="9" rx="1" stroke="#C9A24A" stroke-width="1.5"/></svg></div>
+        <h3>Testing &amp; QA</h3>
+        <ul>
+          <li>Testing across desktop, tablet and mobile</li>
+          <li>Reviewing typography, spacing and alignment</li>
+          <li>Fixing responsive layout problems</li>
+          <li>Maintaining design consistency across pages</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="#C9A24A" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#C9A24A" stroke-width="1.5"/></svg></div>
+        <h3>Maintenance &amp; SEO</h3>
+        <ul>
+          <li>Website maintenance &amp; migration-related tasks</li>
+          <li>Image optimization &amp; performance reviews</li>
+          <li>SEO-related updates &amp; metadata changes</li>
+          <li>Checking buttons, links and redirects</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="ask-contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Get in Touch</span>
+      <h2>Let's build something<br>great together.</h2>
+      <p>Have a project, opportunity, or idea? Let's connect and create something meaningful.</p>
+      <div class="info-line">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4z" stroke="#E3C687" stroke-width="1.6"/><path d="M4 6l8 7 8-7" stroke="#E3C687" stroke-width="1.6"/></svg>
+        <div><strong>Email</strong><span>anilsaichepuri@gmail.com</span></div>
+      </div>
+      <div class="info-line">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="9" width="4" height="12" stroke="#E3C687" stroke-width="1.6"/><circle cx="4" cy="4" r="2" stroke="#E3C687" stroke-width="1.6"/><path d="M10 21v-7a3 3 0 016 0v7M10 9v12" stroke="#E3C687" stroke-width="1.6"/></svg>
+        <div><strong>LinkedIn</strong><span>placeholder — add your profile link</span></div>
+      </div>
+      <div class="info-line">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#E3C687" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#E3C687" stroke-width="1.6"/></svg>
+        <div><strong>Based in Hyderabad</strong><span>Open to WordPress &amp; frontend roles, remote or on-site</span></div>
+      </div>
+    </div>
+
+    <div class="form-card reveal">
+      <h3>Send a Message</h3>
+      <p>I'll get back to you as soon as I can.</p>
+      <form id="askContactForm" action="https://formsubmit.co/anilsaichepuri@gmail.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="form-row">
+          <div class="field">
+            <label for="askName">Name</label>
+            <input type="text" id="askName" name="name" placeholder="Your name" required>
+            <span class="field-err" id="askErrName"></span>
+          </div>
+          <div class="field">
+            <label for="askEmail">Email</label>
+            <input type="email" id="askEmail" name="email" placeholder="you@email.com" required>
+            <span class="field-err" id="askErrEmail"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="askSubject">Subject</label>
+          <input type="text" id="askSubject" name="subject" placeholder="What's this about?" required>
+          <span class="field-err" id="askErrSubject"></span>
+        </div>
+        <div class="field">
+          <label for="askMessage">Message</label>
+          <textarea id="askMessage" name="message" placeholder="Tell me about the project or opportunity..." required></textarea>
+          <span class="field-err" id="askErrMessage"></span>
+        </div>
+        <button type="submit" class="btn btn-gold" id="askSubmitBtn">Send Message</button>
+        <p class="form-success" id="askFormSuccess" role="status" aria-live="polite">Message sent — thank you! I'll get back to you soon.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#ask-home" class="logo">
+          <span class="logo-mark">AS</span>
+          <span class="logo-word">Anil Sai Krishna<span>WORDPRESS &amp; FRONTEND DEV</span></span>
+        </a>
+        <p>WordPress Developer &amp; Frontend Developer building responsive, functional websites — one project at a time.</p>
+        <div class="socials">
+          <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.9 3.9 0 00-1-2.6c3.1-.4 6.4-1.6 6.4-7A5.5 5.5 0 0020 4.8 5.1 5.1 0 0019.9.5S18.7.1 16 2a13.4 13.4 0 00-7 0C6.3.1 5.1.5 5.1.5A5.1 5.1 0 005 4.8a5.5 5.5 0 00-1.5 3.8c0 5.4 3.3 6.6 6.4 7a3.9 3.9 0 00-1 2.6V22" stroke="#F5F1E6" stroke-width="1.4"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="9" width="4" height="12" stroke="#F5F1E6" stroke-width="1.5"/><circle cx="4" cy="4" r="2" stroke="#F5F1E6" stroke-width="1.5"/><path d="M10 21v-7a3 3 0 016 0v7M10 9v12" stroke="#F5F1E6" stroke-width="1.5"/></svg></a>
+          <a href="mailto:anilsaichepuri@gmail.com" aria-label="Email"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#F5F1E6" stroke-width="1.5"/><path d="M3 6l9 7 9-7" stroke="#F5F1E6" stroke-width="1.5"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul><li><a href="#ask-home">Home</a></li><li><a href="#ask-about">About</a></li><li><a href="#ask-skills">Skills</a></li><li><a href="#ask-projects">Projects</a></li><li><a href="#ask-contact">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Focus Areas</h4>
+        <ul><li><a href="#ask-skills">WordPress</a></li><li><a href="#ask-skills">Elementor</a></li><li><a href="#ask-skills">Responsive Design</a></li><li><a href="#ask-skills">Troubleshooting</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Education</h4>
+        <ul>
+          <li>B.Tech, GNITC</li>
+          <li>Graduation Year: 2026</li>
+          <li><a href="/assets/Anil-Sai-Krishna-Resume.pdf" download>Download Resume</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Anil Sai Krishna. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#ask-portfolio -->
+
+<script>
+(function(){
+  'use strict';
+  var root = document.getElementById('ask-portfolio');
+  if(!root) return;
+
+  /* ---------- SKILLS DATA ---------- */
+  var SKILLS = [
+    {name:'WordPress', cat:'wordpress'},
+    {name:'Elementor', cat:'wordpress'},
+    {name:'Elementor Pro', cat:'wordpress'},
+    {name:'Theme Customization', cat:'wordpress'},
+    {name:'Plugin Configuration', cat:'wordpress'},
+    {name:'Website Maintenance', cat:'wordpress'},
+    {name:'WordPress Troubleshooting', cat:'wordpress'},
+    {name:'HTML5', cat:'frontend'},
+    {name:'CSS3', cat:'frontend'},
+    {name:'JavaScript', cat:'frontend'},
+    {name:'Bootstrap', cat:'frontend'},
+    {name:'Responsive Web Design', cat:'frontend'},
+    {name:'UI Implementation', cat:'frontend'},
+    {name:'React.js', cat:'tools'},
+    {name:'Git', cat:'tools'},
+    {name:'GitHub', cat:'tools'},
+    {name:'SEO Basics', cat:'tools'},
+    {name:'Image Optimization', cat:'tools'},
+    {name:'Website Performance', cat:'tools'},
+    {name:'Responsive Testing', cat:'tools'}
+  ];
+  var FILTERS = [
+    {id:'all', label:'All'},
+    {id:'wordpress', label:'WordPress'},
+    {id:'frontend', label:'Frontend'},
+    {id:'tools', label:'Tools'}
+  ];
+
+  var filterWrap = document.getElementById('askSkillFilters');
+  var skillsGrid = document.getElementById('askSkillsGrid');
+
+  filterWrap.innerHTML = FILTERS.map(function(f, i){
+    return '<button class="filter-pill' + (i===0?' active':'') + '" data-filter="' + f.id + '">' + f.label + '</button>';
+  }).join('');
+
+  skillsGrid.innerHTML = SKILLS.map(function(s){
+    return '<div class="skill-card" data-cat="' + s.cat + '">' +
+      '<p class="skill-cat">' + s.cat + '</p>' +
+      '<p class="skill-name">' + s.name + '</p>' +
+    '</div>';
+  }).join('');
+
+  filterWrap.querySelectorAll('.filter-pill').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterWrap.querySelectorAll('.filter-pill').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      skillsGrid.querySelectorAll('.skill-card').forEach(function(card){
+        var show = f === 'all' || card.dataset.cat === f;
+        card.classList.toggle('hide', !show);
+      });
+    });
+  });
+
+  /* ---------- PROJECT DIRECTORY DATA ---------- */
+  var DIR = [
+    {id:'architecture', label:'Architecture & Tech', groups:[
+      {h:'Architectural Rendering / Visualization', items:[
+        {n:'Render Atelier', d:'Designing website sections, service pages, responsive layouts. Maintained a consistent design system across multiple service pages.', tech:['WordPress','Elementor','Elementor Pro','Responsive Design'], url:'https://renderatelier.com/', action:'Live ↗'}
+      ]},
+      {h:'Technology / Product Website', items:[
+        {n:'Autronx', d:'Product page development, WordPress customization, Elementor development for responsive product sections.', tech:['WordPress','Elementor','JavaScript','Responsive Design'], url:'https://autronx.com/', action:'Live ↗'} 
+      ]} 
+    ]}, 
+    {id:'hospitality', label:'Hospitality', groups:[ 
+      {h:'Hospitality / Banquet Hall — Hyderabad', items:[ 
+        {n:'Vaaraahi Banquet Hall', d:'WordPress and Elementor page building — hero, image, content and contact sections, mobile responsiveness and layout refinement.', tech:['WordPress','Elementor','Elementor Pro','JavaScript'], url:null, action:'Case Study'} 
+      ]}, 
+      {h:'Food & Restaurant', items:[ 
+        {n:'Grandline Buffet', d:'Internship project — full details and screenshots to be added.', tech:['To be confirmed'], url:null, action:'Details soon'} 
+      ]}, 
+      {h:'Accommodation', items:[ 
+        {n:'Maruti Residency', d:'Internship project — full details and screenshots to be added.', tech:['To be confirmed'], url:null, action:'Details soon'} 
+      ]}, 
+      {h:'Wedding / Events', items:[ 
+        {n:'Wedica', d:'Internship project — full details and screenshots to be added.', tech:['To be confirmed'], url:null, action:'Details soon'} 
+      ]} 
+    ]}, 
+    {id:'business', label:'Business & Healthcare', groups:[ 
+      {h:'Business / Accounting / Tax Services', items:[ 
+        {n:'Greenvissage', d:'Website content implementation, metadata updates, and maintaining a consistent style across multiple service pages.', tech:['WordPress','Elementor','SEO','Responsive Design'], url:null, action:'Case Study'} 
+      ]}, 
+      {h:'Healthcare', items:[ 
+        {n:'Yutika Hospital', d:'Internship project — full details and screenshots to be added.', tech:['To be confirmed'], url:null, action:'Details soon'} 
+      ]}, 
+      {h:'Business / Product', items:[ 
+        {n:'Aiwe Water', d:'Internship project — full details and screenshots to be added.', tech:['To be confirmed'], url:null, action:'Details soon'} 
+      ]} 
+    ]} 
+  ]; 
+ 
+  var tabsEl = document.getElementById('askDirTabs'); 
+  var resultsEl = document.getElementById('askDirResults'); 
+  var searchEl = document.getElementById('askDirSearch'); 
+  var activeId = 'all'; 
+ 
+  tabsEl.innerHTML = '<button class="tab-pill active" data-id="all">All Projects</button>' + 
+    DIR.map(function(c){ return '<button class="tab-pill" data-id="' + c.id + '">' + c.label + '</button>'; }).join(''); 
+ 
+  function rowHTML(it, catLabel){ 
+    var action = it.url 
+      ? '<a class="dir-row-action" href="' + it.url + '" target="_blank" rel="noopener">' + it.action + '</a>' 
+      : '<span class="dir-row-action disabled">' + it.action + '</span>'; 
+    return '<div class="dir-row">' + 
+      '<div>' + 
+        (catLabel ? '<span class="dir-row-cat">' + catLabel + '</span>' : '') + 
+        '<span class="dir-row-name">' + it.n + '</span>' + 
+        '<span class="dir-row-desc">' + it.d + '</span>' + 
+        '<div class="dir-row-tags">' + it.tech.map(function(t){ return '<span>' + t + '</span>'; }).join('') + '</div>' + 
+      '</div>' + 
+      action + 
+    '</div>'; 
+  } 
+ 
+  function renderAll(){ 
+    var html = ''; 
+    DIR.forEach(function(cat){ 
+      cat.groups.forEach(function(group){ 
+        html += '<div class="dir-subhead">' + group.h + '</div>' + group.items.map(function(it){ return rowHTML(it, null); }).join(''); 
+      }); 
+    }); 
+    resultsEl.innerHTML = html; 
+  } 
+ 
+  function renderCategory(id){ 
+    activeId = id; 
+    tabsEl.querySelectorAll('.tab-pill').forEach(function(b){ b.classList.toggle('active', b.dataset.id === id); }); 
+    if(id === 'all'){ renderAll(); return; } 
+    var cat = DIR.find(function(c){ return c.id === id; }); 
+    var html = ''; 
+    cat.groups.forEach(function(group){ 
+      html += '<div class="dir-subhead">' + group.h + '</div>' + group.items.map(function(it){ return rowHTML(it, null); }).join(''); 
+    }); 
+    resultsEl.innerHTML = html; 
+  } 
+ 
+  function renderSearch(query){ 
+    var q = query.trim().toLowerCase(); 
+    tabsEl.querySelectorAll('.tab-pill').forEach(function(b){ b.classList.remove('active'); }); 
+    var matches = []; 
+    DIR.forEach(function(cat){ 
+      cat.groups.forEach(function(group){ 
+        group.items.forEach(function(it){ 
+          var full = (group.h + ' ' + it.n + ' ' + it.tech.join(' ')).toLowerCase(); 
+          if(full.indexOf(q) !== -1) matches.push({it:it, label:cat.label + ' · ' + group.h}); 
+        }); 
+      }); 
+    }); 
+    if(matches.length === 0){ 
+      resultsEl.innerHTML = '<div class="dir-empty">No projects match "' + query + '" — try another word.</div>'; 
+      return; 
+    } 
+    resultsEl.innerHTML = matches.map(function(m){ return rowHTML(m.it, m.label); }).join(''); 
+  } 
+ 
+  tabsEl.querySelectorAll('.tab-pill').forEach(function(btn){ 
+    btn.addEventListener('click', function(){ searchEl.value = ''; renderCategory(btn.dataset.id); }); 
+  }); 
+  searchEl.addEventListener('input', function(e){ 
+    if(e.target.value.trim() === '') renderCategory(activeId); 
+    else renderSearch(e.target.value); 
+  }); 
+  renderCategory('all'); 
+ 
+  /* ---------- NAV: mobile menu + active link ---------- */ 
+  var burger = document.getElementById('askBurger'); 
+  var navLinks = document.getElementById('askNavLinks'); 
+  burger.addEventListener('click', function(){ 
+    var open = navLinks.style.display === 'flex'; 
+    navLinks.style.display = open ? 'none' : 'flex'; 
+    if(!open){ 
+      navLinks.style.cssText += 'position:absolute;top:80px;left:0;right:0;background:#020D2B;flex-direction:column;padding:24px 32px;gap:20px;'; 
+    } 
+  }); 
+  navLinks.querySelectorAll('a').forEach(function(a){ 
+    a.addEventListener('click', function(){ 
+      if(window.innerWidth <= 980){ navLinks.style.display = 'none'; } 
+    }); 
+  }); 
+ 
+  var sections = root.querySelectorAll('section[id]'); 
+  var links = navLinks.querySelectorAll('a'); 
+  document.addEventListener('scroll', function(){ 
+    var current = sections[0] ? sections[0].id : null; 
+    sections.forEach(function(sec){ 
+      if(sec.getBoundingClientRect().top - 140 <= 0) current = sec.id; 
+    }); 
+    links.forEach(function(l){ l.classList.toggle('active', l.dataset.sec === current); }); 
+  }, {passive:true}); 
+ 
+  /* ---------- REVEAL ON SCROLL ---------- */ 
+  var io = new IntersectionObserver(function(entries){ 
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); 
+  }, {threshold:.12}); 
+  root.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); }); 
+ 
+  /* ---------- CONTACT FORM VALIDATION ---------- */ 
+  var form = document.getElementById('askContactForm'); 
+  var submitBtn = document.getElementById('askSubmitBtn'); 
+  var successMsg = document.getElementById('askFormSuccess'); 
+  var validators = { 
+    name: function(v){ return v.trim().length >= 2 || 'Please enter your name.'; }, 
+    email: function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'Please enter a valid email.'; }, 
+    subject: function(v){ return v.trim().length >= 3 || 'Please add a short subject.'; }, 
+    message: function(v){ return v.trim().length >= 10 || 'Message should be at least 10 characters.'; } 
+  }; 
+  function validateField(name){ 
+    var input = form.elements[name]; 
+    var errEl = document.getElementById('askErr' + name.charAt(0).toUpperCase() + name.slice(1)); 
+    var result = validators[name](input.value); 
+    if(result === true){ errEl.textContent = ''; return true; } 
+    errEl.textContent = result; return false; 
+  } 
+  Object.keys(validators).forEach(function(name){ 
+    form.elements[name].addEventListener('blur', function(){ validateField(name); }); 
+  }); 
+  form.addEventListener('submit', function(e){ 
+    var ok = Object.keys(validators).map(validateField).every(Boolean); 
+    if(!ok){ 
+      e.preventDefault(); 
+      return; 
+    } 
+    submitBtn.textContent = 'Sending...'; 
+    submitBtn.disabled = true; 
+  }); 
+})(); 
+</script>
