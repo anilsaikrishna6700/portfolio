@@ -71,8 +71,10 @@
   #ask-portfolio .hero-meta div{ border-left:1px solid rgba(245,241,230,.2); padding-left:16px; }
   #ask-portfolio .hero-meta strong{ display:block; font-family:'Fraunces',serif; font-size:24px; color:var(--sand); font-weight:600; }
   #ask-portfolio .hero-meta span{ font-size:12px; color:rgba(245,241,230,.6); letter-spacing:.03em; }
-  #ask-portfolio .hero-badge{ position:relative; display:flex; align-items:center; justify-content:center; }
+  #ask-portfolio .hero-badge{ position:relative; display:flex; align-items:center; justify-content:center; min-height:360px; perspective:1000px; }
   #ask-portfolio .hero-badge-ring{ position:absolute; width:100%; height:100%; border-radius:50%; background:radial-gradient(circle, rgba(201,162,74,.16), transparent 70%); }
+  #ask-portfolio .hero-3d-scene{ position:absolute; inset:0; z-index:0; opacity:.9; pointer-events:none; transform:translateZ(-20px); }
+  #ask-portfolio .hero-3d-scene canvas{ width:100%; height:100%; display:block; }
   #ask-portfolio .hero-photo{ width:min(300px, 78%); aspect-ratio:1/1; border-radius:50%; box-shadow:0 30px 70px -20px rgba(0,0,0,.6), 0 0 0 10px rgba(245,241,230,.05); position:relative; z-index:2; background:linear-gradient(155deg, var(--navy-mid), var(--teal)); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:rgba(245,241,230,.55); }
   #ask-portfolio .hero-photo span{ font-family:'Space Mono',monospace; font-size:10.5px; letter-spacing:.1em; }
   #ask-portfolio .hero-ring-spin{ position:absolute; width:min(340px,88%); aspect-ratio:1/1; border-radius:50%; border:1px dashed rgba(227,198,135,.35); animation:spinSlow 60s linear infinite; z-index:1; }
@@ -237,6 +239,7 @@
     #ask-portfolio .burger{ display:flex; }
     #ask-portfolio .hero-grid, #ask-portfolio .about-grid, #ask-portfolio .contact-grid{ grid-template-columns:1fr; }
     #ask-portfolio .hero-badge{ margin-top:26px; }
+    #ask-portfolio .hero-badge{ min-height:330px; }
     #ask-portfolio .why-grid, #ask-portfolio .exp-grid{ grid-template-columns:repeat(2,1fr); }
     #ask-portfolio .picks-grid{ grid-template-columns:repeat(3,1fr); }
     #ask-portfolio .footer-grid{ grid-template-columns:1fr 1fr; }
@@ -270,7 +273,6 @@
       <a href="#ask-contact" data-sec="ask-contact">Contact</a>
     </div>
     <div class="nav-cta">
-      <a href="https://github.com/anilsaikrishna6700/portfolio/raw/refs/heads/main/Anil-Sai-Krishna-Resume.pdf" class="btn btn-gold" download>Resume</a>
       <button class="burger" id="askBurger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -298,6 +300,7 @@
 
     <div class="hero-badge reveal in">
       <div class="hero-badge-ring"></div>
+      <div class="hero-3d-scene" id="askHero3d" aria-hidden="true"></div>
       <div class="hero-ring-spin"></div>
       <div class="hero-photo">
         <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
@@ -587,7 +590,6 @@
         <ul>
           <li>B.Tech, GNITC</li>
           <li>Graduation Year: 2026</li>
-          <li><a href="https://github.com/anilsaikrishna6700/portfolio/raw/refs/heads/main/Anil-Sai-Krishna-Resume.pdf" download>Download Resume</a></li>
         </ul>
       </div>
     </div>
@@ -599,11 +601,71 @@
 
 </div><!-- /#ask-portfolio -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
   'use strict';
   var root = document.getElementById('ask-portfolio');
   if(!root) return;
+
+  /* ---------- HERO 3D SCENE ---------- */
+  (function initHero3D(){
+    var host = root.querySelector('#askHero3d');
+    if(!host || !window.THREE || !window.WebGLRenderingContext) return;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(32, 1, .1, 100);
+    camera.position.z = 5.2;
+    var renderer;
+    try{
+      renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
+    }catch(error){ return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    host.appendChild(renderer.domElement);
+
+    var system = new THREE.Group();
+    var core = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.18, 2),
+      new THREE.MeshBasicMaterial({color:0x1e93bd, wireframe:true, transparent:true, opacity:.52})
+    );
+    var ringMaterial = new THREE.MeshBasicMaterial({color:0xe3c687, wireframe:true, transparent:true, opacity:.7});
+    var ringA = new THREE.Mesh(new THREE.TorusGeometry(1.58, .012, 8, 96), ringMaterial);
+    var ringB = new THREE.Mesh(new THREE.TorusGeometry(1.34, .009, 8, 96), ringMaterial);
+    ringA.rotation.set(.9, .25, .2);
+    ringB.rotation.set(.2, .8, -.5);
+    system.add(core, ringA, ringB);
+    scene.add(system);
+
+    var pointer = {x:0, y:0};
+    var target = {x:0, y:0};
+    function resize(){
+      var width = Math.max(host.clientWidth, 1);
+      var height = Math.max(host.clientHeight, 1);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height, false);
+    }
+    function render(){ renderer.render(scene, camera); }
+    function animate(){
+      target.x += (pointer.x - target.x) * .04;
+      target.y += (pointer.y - target.y) * .04;
+      system.rotation.x += .0018 + target.y * .008;
+      system.rotation.y += .003 + target.x * .008;
+      system.position.x = target.x * .12;
+      system.position.y = -target.y * .12;
+      render();
+      if(!reduceMotion) requestAnimationFrame(animate);
+    }
+    host.parentElement.addEventListener('pointermove', function(event){
+      var bounds = host.parentElement.getBoundingClientRect();
+      pointer.x = ((event.clientX - bounds.left) / bounds.width - .5) * 2;
+      pointer.y = ((event.clientY - bounds.top) / bounds.height - .5) * 2;
+    });
+    host.parentElement.addEventListener('pointerleave', function(){ pointer.x = 0; pointer.y = 0; });
+    resize();
+    if(window.ResizeObserver) new ResizeObserver(resize).observe(host);
+    animate();
+  }());
 
   /* ---------- SKILLS DATA ---------- */
   var SKILLS = [
